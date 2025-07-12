@@ -1,0 +1,14 @@
+# Ignore compiled code
+*.pyc
+
+# Ignore Python cache directory
+__pycache__/
+
+# Ignore virtual environment
+.venv/
+
+# Ignore testing files
+.pytest_cache
+htmlcov/
+.coverage
+.coverage.*
