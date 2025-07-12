@@ -35,7 +35,7 @@ This project implements a simple TCP client-server system in Python where:
 - pytest
 
 
-## Usage - Running the application 
+## Usage - Running the application
 
 ### 1. Clone the Repository
 
@@ -46,9 +46,9 @@ cd TCP-Heartbeat
 
 ### 2. Run the server in a terminal
 
-To start the server on port 5000:
+To start the server on port 1234:
 ```bash
-python3 server.py --port 5000
+python3 server.py --port 1234
 ```
 _If using a priveleged port (such as 123, 80), please run the server as root (e.g. with sudo)._
 
@@ -62,9 +62,9 @@ _Note: No command-line arguments are required_
 
 ### 3. Run the client in another terminal
 
-To start sending heartbeat messages over a TCP socket to the server listening on port 5000 every 100ms:
+To start sending heartbeat messages over a TCP socket to the server listening on port 1234 every 100ms:
 ```bash
-python3 client.py --port 5000 --interval 100
+python3 client.py --port 1234 --interval 100
 ```
 
 ### Command-Line Arguments
@@ -83,7 +83,7 @@ _Note: No command-line arguments are required_
 
 ### Example client output
 ```
-INFO:root:Successfully connected to localhost:5000
+INFO:root:Successfully connected to localhost:1234
 INFO:root:Sequence #1: Sending heartbeat at 1752356183.5769.
 INFO:root:Sequence #2: Sending heartbeat at 1752356183.6781.
 INFO:root:Sequence #3: Sending heartbeat at 1752356183.7790.
@@ -94,7 +94,7 @@ INFO:root:Sequence #5: Sending heartbeat at 1752356183.9805.
 
 ### Example server output
 ```
-INFO:root:Awaiting connection from client on port 5000...
+INFO:root:Awaiting connection from client on port 1234...
 INFO:root:Accepted connection from ('127.0.0.1', 37506)
 INFO:root:Received data at 1752356183.5778: 'Sequence #1: Sending heartbeat at 1752356183.5769. '
 INFO:root:Received data at 1752356183.6788: 'Sequence #2: Sending heartbeat at 1752356183.6781. '
@@ -109,7 +109,7 @@ This project uses `pytest` for testing.
 
 ### 1. Set up virtual environment
 
-Please make sure to install python3-venv, if needed. 
+Please make sure to install python3-venv, if needed.
 
 Once python3-venv is installed, run
 ```bash
@@ -125,7 +125,7 @@ Please make sure to install python3-pip, if not installed already.
 Next, run
 ```bash
 pip3 install pytest
-``` 
+```
 to install the pytest library.
 
 ### 3. Run tests
@@ -152,22 +152,22 @@ to run a particular set of tests (client unit tests, in the above example).
 - At the moment, the client will continue to send its heartbeat messages without checking for an acknowledgement from the server to make sure it was received and parsed.
 
 ### 2. Recovery from temporary firewall rule blocking transmission of heartbeats
-- If a firewall rule is created blocking the server from listening to the heartbeats, then the client will continue sending its heartbeats without knowing that the server did not receive them. 
+- If a firewall rule is created blocking the server from listening to the heartbeats, then the client will continue sending its heartbeats without knowing that the server did not receive them.
 
-- Once this firewall rule is removed, the server will receive all the heartbeat messages that were missed as a single data packet. 
+- Once this firewall rule is removed, the server will receive all the heartbeat messages that were missed as a single data packet.
 
 - The server will then parse the first missed heartbeat and ignore the rest. It will mark the rest of the heartbeat sequence numbers (all except the first in the large data packet) as "missed" and carry on as normal with the new heartbeats being sent live.
 
 ### 3. Two or more clients sending heartbeats at the same time
-- If two or more clients send heartbeats to the server at the same time, then only the first client to establish the connection will have its heartbeats heard by the server. 
+- If two or more clients send heartbeats to the server at the same time, then only the first client to establish the connection will have its heartbeats heard by the server.
 
-- Once the first client stops sending its heartbeats, all of the second clients heartbeats (that were missed by the server until this point) will be received by the server at once as a single data packet. 
+- Once the first client stops sending its heartbeats, all of the second clients heartbeats (that were missed by the server until this point) will be received by the server at once as a single data packet.
 
 - Just like in limitation #2, the server will parse the first heartbeat from the second client and ignore the rest. It will mark the rest of the heartbeat sequence numbers (all except the first) as "missed" and carry on as normal with the new heartbeats being sent live.
 
 
 ### 4. PyTest's Coverage analysis does not work well with the subprocess module
-- Running `pytest` with coverage analysis (`--cov=<path>`) makes some tests fail. 
+- Running `pytest` with coverage analysis (`--cov=<path>`) makes some tests fail.
 - This likely has to do with subprocess and the way the `coverage` module interacts with multiple processes spawned using the subprocess module.
 
 
