@@ -158,7 +158,7 @@ def test_client_invalid_host():
 
     # Client should hav exited because of socket.gaierror
     assert client_proc.returncode == 1
-    assert "Name or service not known" in client_output
+    assert "socket.gaierror" in client_output
 
 # Test if port-in-use error is handled gracefully
 def test_server_port_in_use(free_tcp_port):
