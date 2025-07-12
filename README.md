@@ -10,15 +10,15 @@ This project implements a simple TCP client-server system in Python where:
 
 ## Project Structure
 ```
-├── client.py             # TCP client that sends heartbeat messages
-├── server.py             # TCP server that receives and analyzes heartbeats
-├── helpers.py            # Shared utility functions (parsing, analysis)
+├── client.py              # TCP client that sends heartbeat messages
+├── server.py              # TCP server that receives and analyzes heartbeats
+├── helpers.py             # Shared utility functions for validating arguments
 ├── tests/
-│ ├── conftest.py         # Shared Fixtures for tests
-│ ├── test_server.py      # Unit tests for server logic
-│ ├── test_client.py      # Unit tests for client logic
-│ └── test_integration.py # Integration tests for client-server
-├── pytest.ini            # Configuration for pytest
+│ ├── conftest.py          # Shared Fixtures for tests
+│ ├── test_server_unit.py  # Unit tests for server logic
+│ ├── test_client_unit.py  # Unit tests for client logic
+│ └── test_integration.py  # Integration tests for client-server
+├── pytest.ini             # Configuration for pytest
 ├── LICENSE
 └── README.md
 ```
@@ -111,7 +111,7 @@ This project uses `pytest` for testing.
 
 Please make sure to install python3-venv, if needed. 
 
-Once installed, run
+Once python3-venv is installed, run
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
@@ -136,7 +136,7 @@ pytest
 ```
 to run all tests, or
 ```bash
-pytest tests/test_client.py
+pytest tests/test_client_unit.py
 ```
 to run a particular set of tests (client unit tests, in the above example).
 
@@ -168,7 +168,7 @@ to run a particular set of tests (client unit tests, in the above example).
 
 ### 4. PyTest's Coverage analysis does not work well with the subprocess module
 - Running `pytest` with coverage analysis (`--cov=<path>`) makes some tests fail. 
-- This likely has to do with subprocess and the way the `coverage` module interacts with multiple processes opened using the subprocess module.
+- This likely has to do with subprocess and the way the `coverage` module interacts with multiple processes spawned using the subprocess module.
 
 
 ## License
