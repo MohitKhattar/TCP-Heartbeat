@@ -82,7 +82,7 @@ _Note: No command-line arguments are required_
 ## Example output
 
 ### Example client output
-```bash
+```
 INFO:root:Successfully connected to localhost:5000
 INFO:root:Sequence #1: Sending heartbeat at 1752356183.5769.
 INFO:root:Sequence #2: Sending heartbeat at 1752356183.6781.
@@ -93,7 +93,7 @@ INFO:root:Sequence #5: Sending heartbeat at 1752356183.9805.
 ```
 
 ### Example server output
-```bash
+```
 INFO:root:Awaiting connection from client on port 5000...
 INFO:root:Accepted connection from ('127.0.0.1', 37506)
 INFO:root:Received data at 1752356183.5778: 'Sequence #1: Sending heartbeat at 1752356183.5769. '
