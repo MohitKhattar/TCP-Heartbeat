@@ -166,10 +166,5 @@ to run a particular set of tests (client unit tests, in the above example).
 - Just like in limitation #2, the server will parse the first heartbeat from the second client and ignore the rest. It will mark the rest of the heartbeat sequence numbers (all except the first) as "missed" and carry on as normal with the new heartbeats being sent live.
 
 
-### 4. PyTest's Coverage analysis does not work well with the subprocess module
-- Running `pytest` with coverage analysis (`--cov=<path>`) makes some tests fail.
-- This likely has to do with subprocess and the way the `coverage` module interacts with multiple processes spawned using the subprocess module.
-
-
 ## License
 This project is licensed under the MIT License. See [LICENSE](https://github.com/MohitKhattar/TCP-Heartbeat/blob/main/LICENSE) for details.
